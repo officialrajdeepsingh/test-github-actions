@@ -8,12 +8,13 @@ jobs:
   install:
     runs-on: ubuntu-latest
     steps:
-      - uses: pnpm/action-setup@v3
-        with:
-          version: 8
-      - run:  pnpm add gscan
-      - run : cd ${{ github.action_path }}
+      # - uses: pnpm/action-setup@v3
+      #   with:
+      #     version: 8
+  
+      # - run:  pnpm add gscan
       - run : echo ${{ github.action_path }}
+      - run : echo ${{ github.workspace }}
     #   - name: Easy Zip Files
     #     uses: vimtor/action-zip@v1.2
     #     with:
@@ -27,4 +28,4 @@ jobs:
       - run: ls -la
       - run: pwd
     #   - run : zip fastest.zip assets/build/*/*  partials/*/* author.hbs default.hbs error.hbs index.hbs page.hbs post.hbs tag.hbs
-      - run: pnpm run gscan ${{ github.workspace }}/fastest.zip
+      # - run: pnpm run gscan ${{ github.workspace }}/fastest.zip
