@@ -24,7 +24,8 @@ jobs:
         run: |
               cd ${{github.workspace}}
               zip -r example.zip build/*/* home.txt -j
-              gh release upload ${{github.event.release.tag_name}} ${{ github.workspace }}/example.zip
+              ls
+              gh release upload ${{github.event.release.tag_name}} example.zip
         env:
           GITHUB_TOKEN: ${{ github.TOKEN }}
         shell: bash
