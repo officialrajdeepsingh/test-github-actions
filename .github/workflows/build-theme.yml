@@ -30,6 +30,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: https://uploads.github.com/repos/${{ github.repository }}/releases/${{ steps.get_release.outputs.id }}/assets{?name,label}
-          asset_path: ./SharkGoFiles.zip
-          asset_name: SharkGoFiles.zip
+          asset_path: ${{ github.workspace }}/example.zip
+          asset_name: example.zip
           asset_content_type: application/zip
