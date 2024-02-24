@@ -1,8 +1,8 @@
 name: Build Ghost and test theme
 
-on:
-  - push
-  - pull_request
+on: 
+  release: 
+    types: published
 
 jobs:
   install:
