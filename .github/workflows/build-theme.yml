@@ -9,16 +9,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      
       - name: Easy Zip Files
         uses: vimtor/action-zip@v1.2
         with:
           files: build/ home.txt
           dest: ${{ github.workspace }}/example.zip
+      - run: pwd
+      - run : ls      
       - name: upload binaries to release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v0.1.15
         if: ${{startsWith(github.ref, 'refs/tags/') }}
         with:
-              files: ./example.zip
+            files: ./example.zip
       # - run: pwd
       # - run: ls
       # - name: 'Upload Asset'
