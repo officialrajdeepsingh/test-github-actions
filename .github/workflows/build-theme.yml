@@ -23,7 +23,7 @@ jobs:
       - name: 'Upload Asset'
         run: |
               cd ${{github.workspace}}
-              zip -r example.zip build/*/* home.txt -j
+              zip -r example.zip build/*/* home.txt 
               ls
               gh release upload ${{github.event.release.tag_name}} example.zip
         env:
