@@ -9,24 +9,31 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      # - name: Easy Zip Files
-      #   uses: vimtor/action-zip@v1.2
-      #   with:
-      #     files: build/ home.txt
-      #     dest: ${{ github.workspace }}/example.zip
-
-      - run: pwd
-      - run: ls
-      - name: 'Upload Asset'
-        run: |
-              exit_status=$?
-              cd ${{github.workspace}}
-              zip -r example.zip build/*/* home.txt
-              ls
-              echo "uploading zip into on tag: "
-              gh release upload ${{github.event.release.tag_name}} example.zip
-              echo "Exit status code: $exit_status"
-        env:
-          GITHUB_TOKEN: ${{ github.TOKEN }}
-        shell: bash
+      - name: Easy Zip Files
+        uses: vimtor/action-zip@v1.2
+        with:
+          files: build/ home.txt
+          dest: ${{ github.workspace }}/example.zip
+      - name: upload binaries to release
+        uses: softprops/action-gh-release@v1
+        if: ${{startsWith(github.ref, 'refs/tags/') }}
+        with:
+              files: ${{ github.workspace }}/example.zip
+      # - run: pwd
+      # - run: ls
+      # - name: 'Upload Asset'
+      #   run: |
+      #         exit_status=$?
+      #         cd ${{github.workspace}}
+      #         zip -r example.zip build/*/* home.txt
+      #         ls
+      #         echo "uploading zip into on tag: "
+      #         if gh release upload ${{github.event.release.tag_name}} example.zip; then
+      #             echo "gh release is upload succeeded"
+      #         else
+      #            echo "gh release upload: command is failed"
+      #         fi
+      #         echo "Exit status code: $exit_status"
+      #   env:
+      #     GITHUB_TOKEN: ${{ github.TOKEN }}
+      #   shell: bash
