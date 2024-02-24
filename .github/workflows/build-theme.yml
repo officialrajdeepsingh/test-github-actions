@@ -2,8 +2,6 @@ name: Build Ghost and test theme
 
 on: 
   push:
-    tags:
-      - '*'
 
 jobs:
   install:
@@ -22,11 +20,13 @@ jobs:
       - run: ls
       - name: 'Upload Asset'
         run: |
+              exit_status=$?
               cd ${{github.workspace}}
               zip -r example.zip build/*/* home.txt
               ls
               echo "uploading zip into on tag: "
               gh release upload ${{github.event.release.tag_name}} example.zip
+              echo "Exit status code: $exit_status"
         env:
           GITHUB_TOKEN: ${{ github.TOKEN }}
         shell: bash
