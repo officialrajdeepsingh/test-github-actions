@@ -12,7 +12,6 @@ jobs:
       - uses: pnpm/action-setup@v3
         with:
           version: 8
-      # - run:  pnpm add gscan
       - run : echo ${{ github.action_path }}
       - run : echo ${{ github.workspace }}
       - name: Easy Zip Files
@@ -20,12 +19,6 @@ jobs:
         with:
             files: build/ home.txt
             dest: ${{ github.workspace }}/example.zip
-        # run: |
-        #     if ! [ -x "$(command -v zip)" ]; then
-        #        echo "installing zip command"
-        #        apt-get install zip -y
-        #     fi
-      - run: ls -la
-      - run: pwd
-    #   - run : zip fastest.zip assets/build/*/*  partials/*/* author.hbs default.hbs error.hbs index.hbs page.hbs post.hbs tag.hbs
-      # - run: pnpm run gscan ${{ github.workspace }}/fastest.zip
+      - uses: ncipollo/release-action@v1
+        with:
+          artifacts: "build/ home.txt"
